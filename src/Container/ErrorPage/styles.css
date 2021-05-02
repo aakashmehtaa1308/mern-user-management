@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Fredoka+One&display=swap');
+
+.error-page {
+  margin-top: 6rem;
+}
+
+.error-col-1 {
+  margin-top: 5rem;
+}
+
+.error-col-2 {
+  margin-left: 5rem;
+  width: 40%;
+}
+
+.error-smile {
+  font-size: 8rem;
+  color: #08979c;
+  font-family: 'Alfa Slab One', cursive;
+  font-weight: 900;
+}
+
+.error-header {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+.error-para {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.error-button,
+.error-button:hover,
+.error-button:focus {
+  color: white;
+  background-color: #08979c;
+  border-radius: 2rem;
+  border: none;
+  height: 3rem;
+  width: 10rem;
+}
+
+.error-button:hover {
+  background-color: #08979cd0;
+}

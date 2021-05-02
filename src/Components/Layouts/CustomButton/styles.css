@@ -1,0 +1,16 @@
+.signup-btn,
+.signup-btn:focus {
+  background-color: var(--green);
+  border: none;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 1.2rem;
+  height: 3rem;
+  font-weight: bold;
+}
+
+.signup-btn:hover {
+  background-color: var(--light_green);
+}
