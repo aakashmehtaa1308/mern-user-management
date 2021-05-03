@@ -8,22 +8,11 @@ import { AuthContext } from '../../App';
  **/
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-//   const { state } = React.useContext(AuthContext);
-
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: 'signin',
-              state: { from: props.location },
-            }}
-          />
-        )
+        isAuthenticated ? <Component {...props} /> : <Redirect to='/signin' />
       }
     />
   );

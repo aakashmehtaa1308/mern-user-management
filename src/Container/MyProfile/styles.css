@@ -1,0 +1,10 @@
+.ant-modal-footer .ant-btn:hover {
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.ant-modal-footer .ant-btn + .ant-btn-primary {
+  background-color: var(--green);
+  border: none;
+  color: var(--white);
+}

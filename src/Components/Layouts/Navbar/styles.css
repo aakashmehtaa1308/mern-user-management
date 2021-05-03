@@ -1,32 +1,37 @@
 :root {
   --green: #08979c;
+  --black: #000;
   --light_green: #0ea896;
   --white: #fff;
   --navbar_hover: rgba(255, 255, 255, 0.678);
   --big_font: 1.5rem;
   --medium_font: 1.3rem;
   --small_font: 1rem;
-  --heavy_font_weight: 700;
-  --light_font_weight: 500;
+  --heavy_font_weight: 600;
+  --light_font_weight: 300;
   --small_pad: 2rem;
 }
 
 .navbar-nav {
-  background-color: var(--green);
+  height: 4rem;
+  background-color: var(--black);
   color: var(--white);
-  box-shadow: 0 0px 10px 0 rgb(0 0 0 / 60%);
+  padding-right: 8rem;
+  padding-left: 8rem;
+  padding-top: 0.5rem;
+  box-shadow: 0 0px 20px 0 rgb(0 0 0 / 60%);
 }
 
 .navbar-nav-brand {
-  font-size: var(--big_font);
+  font-size: var(--medium_font);
   font-weight: var(--heavy_font_weight);
   padding-left: var(--small_pad);
-  padding-right: var(--small_pad);
+  padding-right: 5rem;
 }
 
 .navbar-nav-link {
   font-size: var(--medium_font);
-  font-weight: var(--light_font_weight);
+  font-weight: var(--heavy_font_weight);
 }
 
 .navbar-nav-link-right {
@@ -35,13 +40,13 @@
 
 .ant-menu-item .ant-menu-item-icon {
   font-size: var(--medium_font);
-  /* color: aqua; */
 }
 
 .ant-menu-horizontal:not(.ant-menu-dark) .ant-menu-item:hover,
 .ant-menu-horizontal:not(.ant-menu-dark) .ant-menu-item:focus,
 .ant-menu-horizontal:not(.ant-menu-dark) .ant-menu-item-selected,
 .ant-menu-horizontal:not(.ant-menu-dark) .ant-menu-item:active {
-  color: var(--navbar_hover);
-  border-bottom: 2px solid var(--white);
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
+  transition: all 0.2s ease-in-out;
 }

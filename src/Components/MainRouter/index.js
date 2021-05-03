@@ -8,6 +8,8 @@ import PrivateRoute from '../PrivateRoute';
 import ErrorPage from '../../Container/ErrorPage';
 import Users from '../../Container/Users';
 import Profile from '../../Container/Profile';
+import MyProfile from '../../Container/MyProfile';
+import ForgotPassword from '../../Container/ForgotPassword';
 
 /**
  * @author
@@ -16,6 +18,7 @@ import Profile from '../../Container/Profile';
 
 const MainRouter = (props) => {
   const { state } = React.useContext(AuthContext);
+
   return (
     <div>
       <Switch>
@@ -37,11 +40,24 @@ const MainRouter = (props) => {
           component={Profile}
           isAuthenticated={state.isAuthenticated}
         />
+        <PrivateRoute
+          exact
+          path='/users/myprofile'
+          component={MyProfile}
+          isAuthenticated={state.isAuthenticated}
+        />
         {!state.isAuthenticated && (
           <Route exact path='/signin' component={SignIn} />
         )}
         {!state.isAuthenticated && (
           <Route exact path='/signup' component={SignUp} />
+        )}
+        {!state.isAuthenticated && (
+          <Route
+            exact
+            path='/users/forgot-password'
+            component={ForgotPassword}
+          />
         )}
         <Route component={ErrorPage} />
       </Switch>

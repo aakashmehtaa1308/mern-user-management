@@ -1,5 +1,5 @@
 import { ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import { Card, Col, Divider, Row } from 'antd';
+import { Card, Col, Divider, Row, Skeleton } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Axios } from '../../Helpers';
@@ -71,7 +71,7 @@ const Users = (props) => {
       <Card className='users-card'>
         <div className='users-card-heading'>ALL USER</div>
         <Divider />
-        {USERS}
+        {!users ? <Skeleton></Skeleton> : <div>{USERS}</div>}
       </Card>
     </div>
   );

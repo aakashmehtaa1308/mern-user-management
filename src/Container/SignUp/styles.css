@@ -54,5 +54,17 @@
 }
 
 .auth-background-color {
-  background-image: linear-gradient(to bottom right, var(--green), white);
+  /* background-image: linear-gradient(to bottom right, var(--green), white); */
+  /* clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); */
+}
+.signin-card-head-1 {
+  font-size: 3rem;
+  font-weight: bolder;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.signin-card-head-2 {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 400;
 }

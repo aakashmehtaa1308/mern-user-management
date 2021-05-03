@@ -147,6 +147,10 @@ const SignUp = (props) => {
             <Col>
               <UsergroupAddOutlined className='auth-icon' />
             </Col>
+            <Col>
+              <div className='signin-card-head-1'>Welcoming You!</div>
+              <div className='signin-card-head-2'>Create a new account</div>
+            </Col>
           </Row>
           <Divider />
           <Form
@@ -274,7 +278,7 @@ const SignUp = (props) => {
                         history.push('signin');
                       }}
                     >
-                      SIGN IN
+                      Log in to your account.
                     </a>
                   </div>
                 </Col>

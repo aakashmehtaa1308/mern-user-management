@@ -13,24 +13,19 @@ import { AuthContext } from '../../App';
  **/
 
 const SignIn = (props) => {
-  useEffect(() => {
-    document.querySelector('body').classList.add('auth-background-color');
-    document.title = `Sign up`;
-    return () => {
-      document.querySelector('body').classList.remove('auth-background-color');
-      document.title = `User Management`;
-    };
-  }, []);
-
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const history = useHistory();
   const { state, dispatch } = React.useContext(AuthContext);
 
-  const OnRefresh = () => {
-    setEmail(null);
-    setPassword(null);
-  };
+  useEffect(() => {
+    document.querySelector('body').classList.add('auth-background-color');
+    document.title = `Sign in`;
+    return () => {
+      document.querySelector('body').classList.remove('auth-background-color');
+      document.title = `User Management`;
+    };
+  }, []);
 
   const checkValidation = () => {
     if (!email) {
@@ -86,6 +81,23 @@ const SignIn = (props) => {
             token: data.data.token,
           },
         });
+        // for sign-out after token expires...////////////////
+        setTimeout(() => {
+          notification['error']({
+            message: 'Time-out',
+            description: 'Your session was timed out. Please sign-in again.',
+            placement: 'bottomRight',
+            duration: 5,
+          });
+          dispatch({
+            type: 'SIGNOUT',
+          });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }, 3600000);
+        ///////////////////////////////////////////////
+
         history.push('/');
       })
       .catch((error) => {
@@ -105,6 +117,10 @@ const SignIn = (props) => {
           <Row justify='space-around'>
             <Col>
               <UserAddOutlined className='auth-icon' />
+            </Col>
+            <Col>
+              <div className='signin-card-head-1'>Welcome back!</div>
+              <div className='signin-card-head-2'>Sign In to your account</div>
             </Col>
           </Row>
           <Divider />
@@ -156,17 +172,24 @@ const SignIn = (props) => {
                     Be patient. Your information is safe with us.
                   </div>
                   <div className='auth-change-tagline'>
-                    Doesn't have account ?{' '}
+                    Doesn't have account ?
                     <a
                       onClick={() => {
                         history.push('/signup');
                       }}
                     >
-                      SIGN UP
+                      Create an account
                     </a>
                   </div>
                   <div className='auth-change-tagline'>
-                    Don't remember the password ?<a href=''>FORGOT PASSWORD</a>
+                    Don't remember the password ?
+                    <a
+                      onClick={() => {
+                        history.push('/users/forgot-password');
+                      }}
+                    >
+                      Forgot Password
+                    </a>
                   </div>
                 </Col>
               </Row>

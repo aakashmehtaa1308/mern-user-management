@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, notification } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../App';
@@ -20,11 +20,30 @@ const Navbar = (props) => {
   let history = useHistory();
   const { state, dispatch } = React.useContext(AuthContext);
 
+  const GetCurrentKey = () => {
+    if (history.location.pathname === '/') {
+      return ['1'];
+    } else if (history.location.pathname === '/signup') {
+      return ['3'];
+    } else if (history.location.pathname === '/signin') {
+      return ['4'];
+    } else if (history.location.pathname === '/users') {
+      return ['5'];
+    } else if (history.location.pathname === '/users/myprofile') {
+      return ['6'];
+    }
+  };
+
   return (
     <div>
-      <Menu className='navbar-nav' mode='horizontal'>
-        <nobr className='navbar-nav-brand'>USER Management</nobr>
+      <Menu
+        className='navbar-nav'
+        mode='horizontal'
+        defaultSelectedKeys={GetCurrentKey()}
+      >
+        <nobr className='navbar-nav-brand'>MERN Auth</nobr>
         <Menu.Item
+          key='1'
           className='navbar-nav-link navbar-nav-link-left'
           icon={<HomeFilled />}
           onClick={() => {
@@ -43,6 +62,7 @@ const Navbar = (props) => {
 
         {state.isAuthenticated && (
           <Menu.Item
+            key='2'
             className='navbar-nav-link navbar-nav-link-right'
             onClick={() => {
               dispatch({
@@ -56,32 +76,35 @@ const Navbar = (props) => {
               });
             }}
           >
-            SIGN OUT
+            Sign out
           </Menu.Item>
         )}
 
         {!state.isAuthenticated && (
           <Menu.Item
+            key='3'
             className='navbar-nav-link navbar-nav-link-right'
             icon={<UsergroupAddOutlined />}
             onClick={() => history.push(`/signup`)}
           >
-            SIGN UP
+            Sign up
           </Menu.Item>
         )}
 
         {!state.isAuthenticated && (
           <Menu.Item
+            key='4'
             className='navbar-nav-link navbar-nav-link-right'
             icon={<UserAddOutlined />}
             onClick={() => history.push(`/signin`)}
           >
-            SIGN IN
+            Sign in
           </Menu.Item>
         )}
 
         {state.isAuthenticated && (
           <Menu.Item
+            key='5'
             className='navbar-nav-link navbar-nav-link-right'
             icon={<UserOutlined />}
             onClick={() => {
@@ -97,11 +120,12 @@ const Navbar = (props) => {
               }
             }}
           >
-            USERS
+            Users
           </Menu.Item>
         )}
         {state.isAuthenticated && (
           <Menu.Item
+            key='6'
             className='navbar-nav-link navbar-nav-link-right'
             icon={<UserOutlined />}
             onClick={() => {
@@ -113,16 +137,11 @@ const Navbar = (props) => {
                   duration: 5,
                 });
               } else {
-                console.log(JSON.parse(localStorage.getItem('user'))._id);
-                history.push(
-                  `/profile/users?userId=${
-                    JSON.parse(localStorage.getItem('user'))._id
-                  }`
-                );
+                history.push(`/users/myprofile`);
               }
             }}
           >
-            PROFILE
+            Profile
           </Menu.Item>
         )}
       </Menu>
