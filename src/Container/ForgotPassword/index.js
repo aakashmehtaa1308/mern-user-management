@@ -13,6 +13,7 @@ import { useHistory } from 'react-router';
 
 const ForgotPassword = (props) => {
   const [email, setEmail] = useState(null);
+  const history = useHistory();
   const OnSubmit = () => {
     if (!email) {
       notification['error']({
@@ -23,6 +24,35 @@ const ForgotPassword = (props) => {
       });
       return;
     }
+    Axios.put('api/users/forgot-password', { email: email })
+      .then((data) => {
+        console.log(data);
+        notification['success']({
+          message: `Your email has been traced successfully.`,
+          description: `Now, you can enter your new password, you want to store.`,
+          placement: 'bottomRight',
+          duration: 5,
+        });
+        history.push(`/users/reset-password?userId=${data.data.user._id}`);
+      })
+      .catch((error) => {
+        if (!error.response) {
+          notification['error']({
+            message: 'Issues in the server.',
+            description:
+              'There is something wrong with the server, please try after some time',
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        } else {
+          notification['error']({
+            message: error.response.data.message,
+            description: error.response.data.error,
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        }
+      });
   };
   return (
     <div className='auth-container'>

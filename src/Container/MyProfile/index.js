@@ -65,8 +65,8 @@ const MyProfile = (props) => {
       })
       .catch((error) => {
         notification['error']({
-          message: error.response.error,
-          description: error.response.message,
+          message: error.response.message,
+          description: error.response.error,
           placement: 'bottomRight',
           duration: 3,
         });
@@ -93,12 +93,22 @@ const MyProfile = (props) => {
         });
       })
       .catch((error) => {
-        notification['error']({
-          message: error.response.error,
-          description: error.response.message,
-          placement: 'bottomRight',
-          duration: 3,
-        });
+        if (!error.response) {
+          notification['error']({
+            message: 'Issues in the server.',
+            description:
+              'There is something wrong with the server, please try after some time',
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        } else {
+          notification['error']({
+            message: error.response.data.message,
+            description: error.response.data.error,
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        }
       });
     setVisibleDeleteModal(false);
   };
@@ -145,7 +155,8 @@ const MyProfile = (props) => {
           </Row>
           <Divider />
           <div className='profile-user-joined'>
-            Joined: {user.createdAt.split('T')[0]}
+            Joined: {user.createdAt.split('T')[0]},{' '}
+            {user.createdAt.split('T')[1].split('.')[0]}
           </div>
         </Card>
       )}

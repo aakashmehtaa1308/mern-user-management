@@ -34,7 +34,24 @@ const Profile = (props) => {
       .then((data) => {
         setUser(data.data.user);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        if (!error.response) {
+          notification['error']({
+            message: 'Issues in the server.',
+            description:
+              'There is something wrong with the server, please try after some time',
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        } else {
+          notification['error']({
+            message: error.response.data.message,
+            description: error.response.data.error,
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        }
+      });
   }, []);
 
   return (
@@ -59,7 +76,8 @@ const Profile = (props) => {
           </Row>
           <Divider />
           <div className='profile-user-joined'>
-            Joined: {user.createdAt.split('T')[0]}
+            Joined: {user.createdAt.split('T')[0]},{' '}
+            {user.createdAt.split('T')[1].split('.')[0]}
           </div>
         </Card>
       )}

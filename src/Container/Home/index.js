@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Card } from 'antd';
+import './styles.css';
 
 import HomeImage from '../../Images/nature.jpg';
 
@@ -17,10 +18,11 @@ const Home = (props) => {
   }, []);
   return (
     <div>
-      <Card>
-        <div style={{textAlign:'center', fontFamily:'cursive', fontSize:'1.5rem'}}>HOME</div>
+      <Card className='home-card'>
+        <div className='home-card-heading'>HOME</div>
         <div>
-          <img style={{ width: '98vw', height: '85vh' }} src={HomeImage}></img>
+          <img src={HomeImage} className='home-card-image'></img>
+          <div className='home-card-footer'>Home page for this website.</div>
         </div>
       </Card>
     </div>

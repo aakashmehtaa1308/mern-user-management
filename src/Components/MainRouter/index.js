@@ -10,6 +10,7 @@ import Users from '../../Container/Users';
 import Profile from '../../Container/Profile';
 import MyProfile from '../../Container/MyProfile';
 import ForgotPassword from '../../Container/ForgotPassword';
+import ResetPassword from '../../Container/ResetPassword';
 
 /**
  * @author
@@ -58,6 +59,9 @@ const MainRouter = (props) => {
             path='/users/forgot-password'
             component={ForgotPassword}
           />
+        )}
+        {!state.isAuthenticated && (
+          <Route exact path='/users/reset-password' component={ResetPassword} />
         )}
         <Route component={ErrorPage} />
       </Switch>

@@ -1,5 +1,5 @@
 import { ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import { Card, Col, Divider, Row, Skeleton } from 'antd';
+import { Card, Col, Divider, Row, Skeleton, notification } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Axios } from '../../Helpers';
@@ -24,7 +24,22 @@ const Users = (props) => {
         setUsers(data.data.users);
       })
       .catch((error) => {
-        console.log(error.response);
+        if (!error.response) {
+          notification['error']({
+            message: 'Issues in the server.',
+            description:
+              'There is something wrong with the server, please try after some time',
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        } else {
+          notification['error']({
+            message: error.response.data.message,
+            description: error.response.data.error,
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        }
       });
     return () => (document.title = 'User Management');
   }, []);

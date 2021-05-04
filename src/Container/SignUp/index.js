@@ -130,12 +130,22 @@ const SignUp = (props) => {
         history.push('/');
       })
       .catch((error) => {
-        notification['error']({
-          message: error.response.data.error,
-          description: error.response.data.message,
-          placement: 'bottomRight',
-          duration: 5,
-        });
+        if (!error.response) {
+          notification['error']({
+            message: 'Issues in the server.',
+            description:
+              'There is something wrong with the server, please try after some time',
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        } else {
+          notification['error']({
+            message: error.response.data.message,
+            description: error.response.data.error,
+            placement: 'bottomRight',
+            duration: 5,
+          });
+        }
       });
   };
 
